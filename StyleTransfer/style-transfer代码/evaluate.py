@@ -202,16 +202,19 @@ def ffwd_different_dimensions(in_path, out_path, checkpoint_dir,
 
 def build_parser():
     parser = ArgumentParser()
+    #选择模型
     parser.add_argument('--checkpoint', type=str,
                         dest='checkpoint_dir',
                         help='dir or .ckpt file to load checkpoint from',
                         metavar='CHECKPOINT', required=True)
-
+    #待进行风格转换的图像
     parser.add_argument('--in-path', type=str,
                         dest='in_path',help='dir or file to transform',
                         metavar='IN_PATH', required=True)
 
     help_out = 'destination (dir or file) of transformed file or files'
+
+    #生成的图像的路径
     parser.add_argument('--out-path', type=str,
                         dest='out_path', help=help_out, metavar='OUT_PATH',
                         required=True)
