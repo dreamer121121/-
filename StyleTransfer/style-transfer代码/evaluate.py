@@ -129,6 +129,7 @@ def ffwd(data_in, paths_out, checkpoint_dir, device_t='/gpu:0', batch_size=4):
     if is_paths:
         assert len(data_in) == len(paths_out)
         img_shape = get_img(data_in[0]).shape
+        print("--img_shape--",img_shape)
     else:
         assert data_in.size[0] == len(paths_out)
         img_shape = X[0].shape
@@ -234,6 +235,7 @@ def build_parser():
     return parser
 
 def check_opts(opts):
+    print("--opts.checkpoint:--",opts.checkpoint_dir)
     exists(opts.checkpoint_dir, 'Checkpoint not found!')
     exists(opts.in_path, 'In path not found!')
     if os.path.isdir(opts.out_path):
@@ -241,9 +243,9 @@ def check_opts(opts):
         assert opts.batch_size > 0
 
 def main():
-    parser = build_parser()
+    parser = build_parser()#添加参数
     opts = parser.parse_args()
-    check_opts(opts)
+    check_opts(opts) #检查必要的参数是否指定
 
     if not os.path.isdir(opts.in_path):
         if os.path.exists(opts.out_path) and os.path.isdir(opts.out_path):
